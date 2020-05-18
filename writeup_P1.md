@@ -66,7 +66,7 @@ The lines can be extrapolated to a fixed horizon, but by doing so a very small a
 
 ### 2. Shortcomings and Improvements
 
-A prominent shortcoming identified for this pipeline was detection of "false positives". Specifically, on the video "", there are frames where a lines other than lanes are present and these are picked up as lanes with slopes drastically different from the lane line slopes. There are several workarounds possible, the simplest of which has been implemented in the project. A threshold on slope has been applied for any detected line to be classified as a lane, and lines below this threshold are not drawn on the image.
+A prominent shortcoming identified for this pipeline was detection of "false positives". Specifically, on the video "solidYellowLeft.mp4", there are frames where lines other than lanes are present and these are picked up as lanes with slopes drastically different from the lane line slopes. There are several workarounds possible, the simplest of which has been implemented in the project. A threshold on slope has been applied for any detected line to be classified as a lane, and lines below this threshold are not drawn on the image.
 
 ```
 if((x2 - x1) > 0 and (y2-y1)/(x2-x1) < -0.5):
@@ -76,5 +76,3 @@ if((x2 - x1) > 0 and (y2-y1)/(x2-x1) < -0.5):
 This leads us to another shortcoming, which is a possible consequence of the above solution. In some frames, no lines are drawn. This might be because the lines are not above the implemented threshold or it might be because no lines were detected in the first place after Hough Transform. This might be due to stringent Hough Transform Parameters. Possible improvements include, relaxing the Hough Transform Parameters. Another approach would be to maintain a history of the previous frame lane line characteristics and using this information to estimate the lane line position in the next frame instead of performing a blind search in each frame.
 
 Another major improvement would be representation of lane lines using higher order polynomials like a quadratic or a cubic spline. This would help significantly on the challenge video, as the lanes in that video are curved.
-
-
